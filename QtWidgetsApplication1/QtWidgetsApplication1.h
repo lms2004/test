@@ -2,7 +2,6 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_QtWidgetsApplication1.h"
-#include"h.h"
 
 class QtWidgetsApplication1 : public QMainWindow
 {
