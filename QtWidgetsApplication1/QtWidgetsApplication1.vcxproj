@@ -93,7 +93,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="QtWidgetsApplication1.qrc" />
-    <QtUic Include="Authentication.ui" />
     <QtUic Include="QtWidgetsApplication1.ui" />
     <QtMoc Include="QtWidgetsApplication1.h" />
     <ClCompile Include="QtWidgetsApplication1.cpp" />
