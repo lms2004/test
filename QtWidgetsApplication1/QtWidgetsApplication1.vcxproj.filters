@@ -26,9 +26,6 @@
     <QtRcc Include="QtWidgetsApplication1.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtUic Include="test_.ui">
-      <Filter>UI界面</Filter>
-    </QtUic>
     <QtMoc Include="QtWidgetsApplication1.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -40,5 +37,21 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="QtWidgetsApplication1.ui">
+      <Filter>UI界面</Filter>
+    </QtUic>
+    <QtUic Include="registerUser.ui">
+      <Filter>UI界面</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Authentication.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Authentication.cpp">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

@@ -92,11 +92,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="QtWidgetsApplication1.qrc" />
-    <QtUic Include="QtWidgetsApplication1.ui" />
-    <QtMoc Include="QtWidgetsApplication1.h" />
-    <ClCompile Include="QtWidgetsApplication1.cpp" />
+    <QtRcc Include="QtWidgetsApplication1.qrc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </QtRcc>
+    <QtUic Include="QtWidgetsApplication1.ui">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </QtUic>
+    <QtMoc Include="QtWidgetsApplication1.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </QtMoc>
+    <QtMoc Include="Authentication.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </QtMoc>
+    <ClCompile Include="QtWidgetsApplication1.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
+    <QtUic Include="registerUser.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Authentication.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

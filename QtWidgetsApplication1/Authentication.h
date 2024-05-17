@@ -1,46 +1,24 @@
-#ifndef AUTHENTICATION_SERVICE_H
-#define AUTHENTICATION_SERVICE_H
+#ifndef AUTHENTICATION_H
+#define AUTHENTICATION_H
 
-#include <QtWidgets/QMainWindow>
-#include "ui_QtWidgetsApplication1.h"
-#include "h.h"
-#include <iostream>
-#include <unordered_map>
+#include <QMainWindow>
+#include "ui_QtWidgetsApplication1.h" // 包含正确的文件名
+#include "ui_mainwindow.h"
 
-// 引入MySQL数据库库
-#include <mysql.h>
+namespace Ui {
+    class MainWindow; // 这里假设你的主窗口类名为 MainWindow
+}
 
-// 引入OpenSSL库，用于密码加密
-#include <openssl/evp.h>
-#include <openssl/rand.h>
-#include <openssl/sha.h>
-
-
-// 认证服务类
-class AuthenticationService : public QMainWindow
+class Authentication : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    QtWidgetsApplication1(QWidget* parent = Q_NULLPTR);
+    explicit Authentication(QWidget* parent = nullptr);
+    ~Authentication();
 
 private:
-    Ui::QtWidgetsApplication1Class ui;
-private slots:
-    //构造函数
-    AuthenticationService();
-    //析构函数
-    ~AuthenticationService();
-
-    // 登录函数
-    bool login(const std::string& username, const std::string& password);
-    // 注册函数
-    bool registerUser(const std::string& username, const std::string& password);
-
-    // 本地缓存的用户信息
-    std::unordered_map<std::string, std::string> users;
-    // 密码哈希处理函数
-    std::string hashPassword(const std::string& password);
+    Ui::MainWindow* ui; // 确保这个成员变量存在
 };
 
-#endif // AUTHENTICATION_SERVICE_H
+#endif // AUTHENTICATION_H

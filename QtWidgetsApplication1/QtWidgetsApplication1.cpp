@@ -12,4 +12,3 @@ void QtWidgetsApplication1::PushButtonClicked()
     ui.lineEdit->setText(pushButtonShowText);
 
 }
-
