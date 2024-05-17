@@ -10,4 +10,6 @@ void QtWidgetsApplication1::PushButtonClicked()
 {
     QString pushButtonShowText = "You Has Been Clicked The Push Button!!!";
     ui.lineEdit->setText(pushButtonShowText);
+
 }
+
