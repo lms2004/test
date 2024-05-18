@@ -1,24 +1,32 @@
-#ifndef AUTHENTICATION_H
-#define AUTHENTICATION_H
 
+// mainwindow.h
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include "ui_registerUser.h"
 #include <QMainWindow>
-#include "ui_QtWidgetsApplication1.h" // 包含正确的文件名
-#include "ui_mainwindow.h"
 
-namespace Ui {
-    class MainWindow; // 这里假设你的主窗口类名为 MainWindow
-}
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
-class Authentication : public QMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit Authentication(QWidget* parent = nullptr);
-    ~Authentication();
+    MainWindow(QWidget* parent = nullptr);
+    ~MainWindow();
+
+private slots:
+    void registerUser();
 
 private:
-    Ui::MainWindow* ui; // 确保这个成员变量存在
+    Ui::MainWindow* ui;
+    QString username;
+    QString password;
+
+    QString performRegistration(const QString& username, const QString& password);
 };
 
-#endif // AUTHENTICATION_H
+#endif // MAINWINDOW_H
