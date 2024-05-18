@@ -1,5 +1,4 @@
-// main.cpp
-//#include "Authentication.h"
+#include "Authentication.h"
 #include "login.h"
 #include <QApplication>
 
