@@ -40,6 +40,9 @@
     <ClCompile Include="Authentication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="login.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="QtWidgetsApplication1.ui">
@@ -48,9 +51,15 @@
     <QtUic Include="registerUser.ui">
       <Filter>UI界面</Filter>
     </QtUic>
+    <QtUic Include="loginUser.ui">
+      <Filter>UI界面</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Authentication.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="login.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
