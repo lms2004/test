@@ -1,17 +1,14 @@
-#include "Authentication.h"
-#include "login.h"
+#include "mainwindow.h"
+#include "authenticationservice.h"
 #include <QApplication>
-#include <mysql.h>
-#include <openssl/evp.h>
-#include <openssl/rand.h>
-#include <openssl/sha.h>
 
-//×¢²á/µÇÂ¼½çÃæ
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
+
     MainWindow w;
     w.show();
+
+    AuthenticationService authService;
+
     return a.exec();
 }
-

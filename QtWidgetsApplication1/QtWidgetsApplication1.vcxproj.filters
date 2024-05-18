@@ -37,10 +37,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Authentication.cpp">
+    <ClCompile Include="login.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="login.cpp">
+    <ClCompile Include="authenticationservice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="register.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,11 +59,19 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Authentication.h">
-      <Filter>Resource Files\Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="login.h">
       <Filter>Resource Files\Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="mainwindow.h">
+      <Filter>Resource Files\Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="authenticationservice.h">
+      <Filter>Resource Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="register.h">
+      <Filter>Resource Files\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
