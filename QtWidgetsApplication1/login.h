@@ -1,10 +1,8 @@
-
-// mainwindow.h
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "ui_registerUser.h"
 #include <QMainWindow>
+#include "ui_loginUser.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,14 +17,15 @@ public:
     ~MainWindow();
 
 private slots:
-    void registerUser();
+    void login();
 
 private:
     Ui::MainWindow* ui;
     QString username;
     QString password;
 
-    QString performRegistration(const QString& username, const QString& password);
+    QString performLogin(const QString& username, const QString& password);
 };
 
 #endif // MAINWINDOW_H
+
