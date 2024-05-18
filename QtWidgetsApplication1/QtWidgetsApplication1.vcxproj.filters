@@ -65,12 +65,12 @@
     <QtMoc Include="mainwindow.h">
       <Filter>Resource Files\Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="register.h">
+      <Filter>Resource Files\Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="authenticationservice.h">
-      <Filter>Resource Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="register.h">
       <Filter>Resource Files\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

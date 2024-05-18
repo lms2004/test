@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClInclude Include="authenticationservice.h" />
     <QtMoc Include="mainwindow.h" />
-    <ClInclude Include="register.h" />
+    <QtMoc Include="register.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
