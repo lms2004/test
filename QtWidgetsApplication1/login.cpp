@@ -1,6 +1,6 @@
 #include "login.h"
 
-LoginWindow::LoginWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::LoginWindow) {
+LoginWindow::LoginWindow(QWidget* parent) : QWidget(parent), ui(new Ui::LoginWindow) {
     ui->setupUi(this);
     connect(ui->pushButtonLogin, &QPushButton::clicked, this, &LoginWindow::on_pushButtonLogin_clicked);
 }

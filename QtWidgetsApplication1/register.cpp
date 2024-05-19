@@ -1,6 +1,6 @@
 #include "register.h"
 
-RegisterWindow::RegisterWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::RegisterWindow) {
+RegisterWindow::RegisterWindow(QWidget* parent) : QWidget(parent), ui(new Ui::RegisterWindow) {
     ui->setupUi(this);
     connect(ui->pushButtonRegister, &QPushButton::clicked, this, &RegisterWindow::on_pushButtonRegister_clicked);
 }

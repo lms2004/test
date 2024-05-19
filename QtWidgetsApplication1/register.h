@@ -5,7 +5,7 @@
 #include "ui_registerUser.h"
 #include "authenticationservice.h"
 
-class RegisterWindow : public QMainWindow {
+class RegisterWindow : public QWidget {
     Q_OBJECT
 public:
     RegisterWindow(QWidget* parent = nullptr);

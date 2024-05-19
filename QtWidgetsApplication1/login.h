@@ -5,7 +5,7 @@
 #include "ui_loginUser.h"
 #include "authenticationservice.h"
 
-class LoginWindow : public QMainWindow {
+class LoginWindow : public QWidget {
     Q_OBJECT
 public:
     LoginWindow(QWidget* parent = nullptr);
