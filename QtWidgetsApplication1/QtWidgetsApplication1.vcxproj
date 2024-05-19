@@ -109,7 +109,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="register.cpp" />
+    <ClCompile Include="register.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <QtRcc Include="QtWidgetsApplication1.qrc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -141,6 +144,7 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <QtUic Include="registerUser.ui" />
+    <QtUic Include="registerUser1.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="login.h">
@@ -149,10 +153,14 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="authenticationservice.h" />
-    <QtMoc Include="loginUser.h" />
-    <QtMoc Include="mainwindow.h" />
-    <QtMoc Include="register.h" />
+    <ClInclude Include="authenticationservice.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <QtMoc Include="register.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </QtMoc>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
