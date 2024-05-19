@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="authenticationservice.h" />
+    <QtMoc Include="loginUser.h" />
     <QtMoc Include="mainwindow.h" />
     <QtMoc Include="register.h" />
   </ItemGroup>
