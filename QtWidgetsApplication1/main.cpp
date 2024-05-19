@@ -1,12 +1,12 @@
-#include "mainwindow.h"
+#include "QtWidgetsApplication1.h"
 #include "authenticationservice.h"
 #include <QApplication>
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
 
-    MainWindow w;
-    w.show();
+    /*QtWidgetsApplication1 w;
+    w.show();*/
 
     AuthenticationService authService;
 
