@@ -1,7 +1,6 @@
 #ifndef LOGIN_H
 #define LOGIN_H
-
-#include <QMainWindow>
+#include <QWidget>
 #include "ui_loginUser.h"
 #include "authenticationservice.h"
 
@@ -16,10 +15,6 @@ private slots:
 
 private:
     Ui::LoginWindow* ui;
-    QString username;
-    QString password;
-    QString performLogin(const QString& username, const QString& password);
+    AuthenticationService authService;
 };
-
 #endif // LOGIN_H
-

@@ -1,6 +1,5 @@
 #include <QApplication>
 #include <QWidget>
-#include "AuthenticationService.h"
 #include "login.h"
 #include "register.h"
 
@@ -12,8 +11,8 @@ int main(int argc, char* argv[]) {
     window.show();
 
 
-    //RegisterWindow window;
-    //window.show();
+   /* RegisterWindow window;
+    window.show();*/
 
 
     return a.exec();

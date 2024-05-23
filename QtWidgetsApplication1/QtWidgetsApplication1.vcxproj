@@ -144,7 +144,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <QtUic Include="registerUser.ui" />
-    <QtUic Include="registerUser1.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="login.h">
