@@ -1,8 +1,9 @@
 #include "login.h"
 
-LoginWindow::LoginWindow(QWidget* parent) : QWidget(parent), ui(new Ui::LoginWindow) {
+LoginWindow::LoginWindow(QWidget* parent) : QWidget(parent), ui(new Ui::LoginWindow), authService() {
     ui->setupUi(this);
-    connect(ui->pushButtonLogin, &QPushButton::clicked, this, &LoginWindow::on_pushButtonLogin_clicked);
+    ui->login_success->hide();
+    ui->login_failure->hide();
 }
 
 LoginWindow::~LoginWindow() {
@@ -10,19 +11,12 @@ LoginWindow::~LoginWindow() {
 }
 
 void LoginWindow::on_pushButtonLogin_clicked() {
-    username = ui->lineEditUsername->text();
-    password = ui->lineEditPassword->text();
-    QString loginResult = performLogin(username, password);
-    ui->labelLoginResult->setText(loginResult);
-}
-
-QString LoginWindow::performLogin(const QString& username, const QString& password) {
-    AuthenticationService authService;
+    QString username = ui->lineEditUsername->text();
+    QString password = ui->lineEditPassword->text();
     if (authService.login(username.toStdString(), password.toStdString())) {
-        return "登录成功！";
+        ui->login_success->show();
     }
     else {
-        return "用户名或密码错误！";
+        ui->login_failure->show();
     }
 }
-

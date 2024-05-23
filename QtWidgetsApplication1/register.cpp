@@ -1,8 +1,9 @@
 #include "register.h"
 
-RegisterWindow::RegisterWindow(QWidget* parent) : QWidget(parent), ui(new Ui::RegisterWindow) {
+RegisterWindow::RegisterWindow(QWidget* parent) : QWidget(parent), ui(new Ui::RegisterWindow), authService() {
     ui->setupUi(this);
-    connect(ui->pushButtonRegister, &QPushButton::clicked, this, &RegisterWindow::on_pushButtonRegister_clicked);
+    ui->register_success->hide();
+    ui->register_failure->hide();
 }
 
 RegisterWindow::~RegisterWindow() {
@@ -10,18 +11,13 @@ RegisterWindow::~RegisterWindow() {
 }
 
 void RegisterWindow::on_pushButtonRegister_clicked() {
-    username = ui->lineEditUsername->text();
-    password = ui->lineEditPassword->text();
-    QString registrationResult = performRegistration(username, password);
-    ui->labelRegistrationResult->setText(registrationResult);
-}
-
-QString RegisterWindow::performRegistration(const QString& username, const QString& password) {
-    AuthenticationService authService;
+    QString username = ui->lineEditUsername->text();
+    QString password = ui->lineEditPassword->text();
     if (authService.registerUser(username.toStdString(), password.toStdString())) {
-        return "注册成功！";
+        ui->register_success->show();
     }
     else {
-        return "注册失败，用户名可能已存在。";
+        ui->register_failure->show();
     }
 }
+

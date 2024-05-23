@@ -1,7 +1,6 @@
 #ifndef REGISTER_H
 #define REGISTER_H
-
-#include <QMainWindow>
+#include <QWidget>
 #include "ui_registerUser.h"
 #include "authenticationservice.h"
 
@@ -16,9 +15,6 @@ private slots:
 
 private:
     Ui::RegisterWindow* ui;
-    QString username;
-    QString password;
-    QString performRegistration(const QString& username, const QString& password);
+    AuthenticationService authService;
 };
-
 #endif // REGISTER_H
