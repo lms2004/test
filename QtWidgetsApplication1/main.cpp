@@ -12,8 +12,8 @@ int main(int argc, char* argv[]) {
     window.show();
 
 
-    RegisterWindow window;
-    window.show();
+    //RegisterWindow window;
+    //window.show();
 
 
     return a.exec();
