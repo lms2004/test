@@ -21,6 +21,6 @@ private:
     std::string hashPassword(const std::string& password);
     MYSQL* connectDB();
     void checkAndCreateDatabase();
-    char database_password[20] = "root";
+    char database_password[20] = "123456";
 };
 #endif // AUTHENTICATION_SERVICE_H

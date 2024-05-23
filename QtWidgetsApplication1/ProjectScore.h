@@ -51,6 +51,7 @@ class ProjectMysql {
     MYSQL mysql;//数据库句柄
     MYSQL_RES* res;//查询结果集
     MYSQL_ROW row;//记录结构体
+    char database_password[20] = "123456";
 public:
     ProjectMysql();//初始化数据库
     //析构函数;
