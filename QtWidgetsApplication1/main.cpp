@@ -8,12 +8,12 @@ int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
 
 
-   /* LoginWindow window;
+  /*  LoginWindow window;
     window.show();*/
 
 
-   /* RegisterWindow window;
-    window.show();*/
+  ///*  RegisterWindow window;
+  //  window.show();*/
 
     ProjectScoreManage window;
     window.show();

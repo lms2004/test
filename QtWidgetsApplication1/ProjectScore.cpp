@@ -214,11 +214,21 @@ using namespace std;
 ProjectMysql::ProjectMysql() {
 	//初始化数据库
 	mysql_init(&mysql);
+	if (mysql_real_connect(&mysql, "127.0.0.1", "root", database_password, NULL, 3306, NULL, 0) == NULL) {
+		printf("错误原因: %s\n", mysql_error(&mysql));
+		printf("连接失败！\n");
+		exit(-1);
+	}
+	if (mysql_query(&mysql, "CREATE DATABASE IF NOT EXISTS  user_db")) {
+		std::cerr << "Error: Unable to create the database." << std::endl;
+	}
+	mysql_close(&mysql);
+	mysql_init(&mysql);
 	//设置字符编码
 	mysql_options(&mysql, MYSQL_SET_CHARSET_NAME, "gbk");
 	//连接数据库
 	//这里需要输入自己的本机名和密码，若全为默认，只需更改*处为自己的密码以及”xsgl“处改成自己创建的数据库即可
-	if (mysql_real_connect(&mysql, "127.0.0.1", "root", "123456", "test", 3306, NULL, 0) == NULL) {
+	if (mysql_real_connect(&mysql, "127.0.0.1", "root", database_password, "user_db", 3306, NULL, 0) == NULL) {
 		printf("错误原因: %s\n", mysql_error(&mysql));
 		printf("连接失败！\n");
 		exit(-1);
