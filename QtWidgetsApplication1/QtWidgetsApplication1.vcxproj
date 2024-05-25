@@ -61,8 +61,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <ExecutablePath>E:\Program Files\OpenSSL-Win64\include;$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>E:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\OpenSSL-Win64\lib;E:\Program Files\OpenSSL-Win64\lib\VC\x64\MD;D:\尹\OpenSSL-Win64\lib;D:\尹\OpenSSL-Win64\lib\VC\x64\MD;D:\mysql\mysql-8.2.0-winx64\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>E:\Program Files\MySQL\MySQL Server 8.0\include;E:\Program Files\OpenSSL-Win64\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\OpenSSL-Win64\include;D:\尹\OpenSSL-Win64\include;D:\mysql\mysql-8.2.0-winx64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\OpenSSL-Win64\lib;E:\Program Files\OpenSSL-Win64\lib\VC\x64\MD;D:\尹\OpenSSL-Win64\lib;D:\尹\OpenSSL-Win64\lib\VC\x64\MD;D:\mysql\mysql-8.2.0-winx64\lib;E:\Openssl\OpenSSL-Win64\lib;E:\Qt\Qt7.1\6.7.0\msvc2019_64\lib;E:\Qt\Qt7.1\6.6.3\msvc2019_64\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Program Files\MySQL\MySQL Server 8.0\include;E:\Program Files\OpenSSL-Win64\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\OpenSSL-Win64\include;D:\尹\OpenSSL-Win64\include;D:\mysql\mysql-8.2.0-winx64\include;E:\Qt\Qt7.1\6.7.0\msvc2019_64\include;E:\Openssl\OpenSSL-Win64\include;E:\Qt\Qt7.1\6.6.3\msvc2019_64\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <IncludePath>C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\OpenSSL-Win64\include;$(IncludePath)</IncludePath>
@@ -70,9 +70,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalDependencies>libmysql.lib;libcrypto.lib;libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libmysql.lib;libcrypto.lib;libssl.lib;Qt5Networkd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files\OpenSSL-Win64\lib\VC\x64\MDd;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\CodeLib\OpenCV\opencv\build\include;$(QTDIR)\include\QtNetwork;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
@@ -115,6 +118,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="uploader.cpp" />
     <QtRcc Include="QtWidgetsApplication1.qrc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -147,6 +151,7 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <QtUic Include="registerUser.ui" />
+    <QtUic Include="uploader.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="login.h">
@@ -160,6 +165,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ProjectScore.h" />
+    <QtMoc Include="uploader.h" />
     <QtMoc Include="ProjectScoreManage.h" />
     <QtMoc Include="register.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
