@@ -15,7 +15,7 @@
 #include <QFile>
 
 uploader::uploader(QWidget* parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
 {
     ui.setupUi(this);
 

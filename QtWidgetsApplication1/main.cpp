@@ -3,6 +3,7 @@
 #include "login.h"
 #include "register.h"
 #include "ProjectScoreManage.h"
+#include "uploader.h"
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
@@ -15,9 +16,9 @@ int main(int argc, char* argv[]) {
   ///*  RegisterWindow window;
   //  window.show();*/
 
-    ProjectScoreManage window;
+    
+    uploader window;
     window.show();
-
 
     return a.exec();
 }

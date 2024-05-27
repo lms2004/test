@@ -5,8 +5,9 @@
 #include "ui_uploader.h"
 #include "ProjectScore.h"
 #include "ProjectScoreManage.h" 
+#include <QWidget>
 
-class uploader : public QMainWindow
+class uploader : public QWidget
 {
     Q_OBJECT
 
