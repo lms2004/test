@@ -21,6 +21,9 @@ public:
     ProjectScoreManage(QWidget* parent = nullptr);
     ~ProjectScoreManage();
 
+signals:
+    void doneManaging(); // ∂®“Â–≈∫≈
+
 private:
     Ui::ProjectScoreManage ui;
     std::vector<Project> projects;

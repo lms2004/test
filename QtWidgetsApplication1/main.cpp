@@ -52,12 +52,12 @@ int main(int argc, char* argv[]) {
         loginWindow.show();
         });
 
-    //QObject::connect(&projectScoreManageWindow, &ProjectScoreManage::doneManaging, [&]() {
-    //    projectScoreManageWindow.close();
-    //    uploaderWindow.show();
-    //    });
+    QObject::connect(&projectScoreManageWindow, &ProjectScoreManage::doneManaging, [&]() {
+        projectScoreManageWindow.close();
+        uploaderWindow.show();
+        });
 
-    loginWindow.show();
+    projectScoreManageWindow.show();
 
     return a.exec();
 }
