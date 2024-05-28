@@ -29,6 +29,9 @@
     <ClCompile Include="QtWidgetsApplication1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <QtMoc Include="changePassword.h">
+      <Filter>Resource Files\Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,6 +55,9 @@
     <ClCompile Include="uploader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="changePassword.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="QtWidgetsApplication1.ui">
@@ -67,6 +73,9 @@
       <Filter>UI界面</Filter>
     </QtUic>
     <QtUic Include="uploader.ui">
+      <Filter>UI界面</Filter>
+    </QtUic>
+    <QtUic Include="changePassword.ui">
       <Filter>UI界面</Filter>
     </QtUic>
   </ItemGroup>
