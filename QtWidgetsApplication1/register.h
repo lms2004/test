@@ -10,6 +10,10 @@ public:
     RegisterWindow(QWidget* parent = nullptr);
     ~RegisterWindow();
 
+signals:
+    void registerSuccessful();
+    void ToLogin();
+
 private slots:
     void on_pushButtonRegister_clicked();
 

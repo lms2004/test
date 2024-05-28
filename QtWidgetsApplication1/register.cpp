@@ -15,6 +15,7 @@ void RegisterWindow::on_pushButtonRegister_clicked() {
     QString password = ui->lineEditPassword->text();
     if (authService.registerUser(username.toStdString(), password.toStdString())) {
         ui->register_success->show();
+        emit registerSuccessful(); // 发送注册成功信号
     }
     else {
         ui->register_failure->show();
