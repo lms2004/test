@@ -12,10 +12,11 @@ public:
 
 signals:
     void registerSuccessful();
-    void ToLogin();
+    void switchToLogin();
 
 private slots:
     void on_pushButtonRegister_clicked();
+    void on_pushButtonBackToLogin_clicked();
 
 private:
     Ui::RegisterWindow* ui;

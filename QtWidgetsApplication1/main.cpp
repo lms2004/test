@@ -4,25 +4,60 @@
 #include "register.h"
 #include "ProjectScoreManage.h"
 #include "uploader.h"
+#include"changePassword.h"
+
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
 
-    LoginWindow window1;
-    RegisterWindow window2;
-    uploader window3;
+    LoginWindow loginWindow;
+    RegisterWindow registerWindow;
+    ChangePasswordWindow changePasswordWindow;
+    ProjectScoreManage projectScoreManageWindow;
+    uploader uploaderWindow;
 
-    QObject::connect(&window1, &LoginWindow::loginSuccessful, [&]() {
-        window1.close();
-        window2.show();
+    // 连接信号和槽，处理窗口之间的切换
+    QObject::connect(&loginWindow, &LoginWindow::loginSuccessful, [&]() {
+        loginWindow.close();
+        projectScoreManageWindow.show();
         });
 
-    QObject::connect(&window2, &RegisterWindow::registerSuccessful, [&]() {
-        window2.close();
-        window3.show();
+    QObject::connect(&loginWindow, &LoginWindow::changePasswordRequested, [&]() {
+        loginWindow.close();
+        changePasswordWindow.show();
         });
 
-    window2.show();
+    QObject::connect(&loginWindow, &LoginWindow::switchToRegister, [&]() {
+        loginWindow.close();
+        registerWindow.show();
+        });
+
+    QObject::connect(&registerWindow, &RegisterWindow::registerSuccessful, [&]() {
+        registerWindow.close();
+        uploaderWindow.show();
+        });
+
+    QObject::connect(&registerWindow, &RegisterWindow::switchToLogin, [&]() {
+        registerWindow.close();
+        loginWindow.show();
+        });
+
+    QObject::connect(&changePasswordWindow, &ChangePasswordWindow::passwordChanged, [&]() {
+        changePasswordWindow.close();
+        loginWindow.show();
+        });
+
+    QObject::connect(&changePasswordWindow, &ChangePasswordWindow::backToLogin, [&]() {
+        changePasswordWindow.close();
+        loginWindow.show();
+        });
+
+    //QObject::connect(&projectScoreManageWindow, &ProjectScoreManage::doneManaging, [&]() {
+    //    projectScoreManageWindow.close();
+    //    uploaderWindow.show();
+    //    });
+
+    loginWindow.show();
 
     return a.exec();
 }

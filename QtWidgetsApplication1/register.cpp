@@ -22,3 +22,6 @@ void RegisterWindow::on_pushButtonRegister_clicked() {
     }
 }
 
+void RegisterWindow::on_pushButtonBackToLogin_clicked() {
+    emit switchToLogin(); // 发送切换到登录界面信号
+}

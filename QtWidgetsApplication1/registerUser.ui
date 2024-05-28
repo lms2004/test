@@ -135,7 +135,40 @@
     <string>注册</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>290</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>已有账号？登录</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>RegisterWindow</receiver>
+   <slot>on_pushButtonBackToLogin_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>183</x>
+     <y>316</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>227</x>
+     <y>468</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_pushButtonBackToLogin_clicked()</slot>
+ </slots>
 </ui>

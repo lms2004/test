@@ -13,9 +13,13 @@ public:
 
 signals:
     void loginSuccessful();
+    void changePasswordRequested();
+    void switchToRegister();
 
 private slots:
     void on_pushButtonLogin_clicked();
+    void on_pushButtonChangePassword_clicked();
+    void on_pushButtonRegister_clicked();
 
 private:
     Ui::LoginWindow* ui;

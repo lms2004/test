@@ -11,17 +11,16 @@ public:
     ChangePasswordWindow(QWidget* parent = nullptr);
     ~ChangePasswordWindow();
 
+signals:
+    void passwordChanged();
+    void backToLogin();
+
 private slots:
     void on_pushButtonChangePassword_clicked();
 
 private:
     Ui::ChangePasswordWindow* ui;
     AuthenticationService authService;
-    //std::string username;
 };
 
 #endif // CHANGEPASSWORD_H
-
-
-
-

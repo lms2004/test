@@ -170,5 +170,42 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButtonRegister</sender>
+   <signal>clicked()</signal>
+   <receiver>LoginWindow</receiver>
+   <slot>on_pushButtonRegister_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>143</x>
+     <y>325</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>220</x>
+     <y>463</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonChangePassword</sender>
+   <signal>clicked()</signal>
+   <receiver>LoginWindow</receiver>
+   <slot>on_pushButtonChangePassword_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>456</x>
+     <y>322</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>504</x>
+     <y>466</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_pushButtonRegister_clicked()</slot>
+  <slot>on_pushButtonChangePassword_clicked()</slot>
+ </slots>
 </ui>

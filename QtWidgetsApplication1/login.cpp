@@ -5,6 +5,10 @@ LoginWindow::LoginWindow(QWidget* parent)
     ui->setupUi(this);
     ui->login_success->hide();
     ui->login_failure->hide();
+
+    connect(ui->pushButtonLogin, &QPushButton::clicked, this, &LoginWindow::on_pushButtonLogin_clicked);
+    connect(ui->pushButtonChangePassword, &QPushButton::clicked, this, &LoginWindow::on_pushButtonChangePassword_clicked);
+    connect(ui->pushButtonRegister, &QPushButton::clicked, this, &LoginWindow::on_pushButtonRegister_clicked);
 }
 
 LoginWindow::~LoginWindow() {
@@ -21,4 +25,12 @@ void LoginWindow::on_pushButtonLogin_clicked() {
     else {
         ui->login_failure->show();
     }
+}
+
+void LoginWindow::on_pushButtonChangePassword_clicked() {
+    emit changePasswordRequested(); // Emit changePasswordRequested signal
+}
+
+void LoginWindow::on_pushButtonRegister_clicked() {
+    emit switchToRegister(); // Emit switchToRegister signal
 }
