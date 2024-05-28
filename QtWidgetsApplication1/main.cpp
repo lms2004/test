@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
 
     QObject::connect(&registerWindow, &RegisterWindow::registerSuccessful, [&]() {
         registerWindow.close();
-        uploaderWindow.show();
+        loginWindow.show();
         });
 
     QObject::connect(&registerWindow, &RegisterWindow::switchToLogin, [&]() {
