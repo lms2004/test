@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="changePassword.cpp" />
     <ClCompile Include="ProjectScore.cpp" />
     <ClCompile Include="ProjectScoreManage.cpp" />
     <ClCompile Include="register.cpp">
@@ -126,6 +127,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </QtRcc>
+    <QtUic Include="changePassword.ui" />
     <QtUic Include="loginUser.ui" />
     <QtUic Include="ProjectScoreManage.ui" />
     <QtUic Include="QtWidgetsApplication1.ui">
@@ -167,6 +169,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <QtMoc Include="changePassword.h" />
     <ClInclude Include="ProjectScore.h" />
     <QtMoc Include="uploader.h" />
     <QtMoc Include="ProjectScoreManage.h" />

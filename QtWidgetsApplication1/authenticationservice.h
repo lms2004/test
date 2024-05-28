@@ -13,6 +13,7 @@ public:
     ~AuthenticationService();
     bool login(const std::string& username, const std::string& password);
     bool registerUser(const std::string& username, const std::string& password);
+    bool changePassword(const std::string& username, const std::string& oldPassword, const std::string& newPassword);
 
 private:
     std::unordered_map<std::string, std::string> users;
