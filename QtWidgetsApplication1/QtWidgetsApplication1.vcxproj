@@ -70,18 +70,21 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalDependencies>libmysql.lib;libcrypto.lib;libssl.lib;Qt6Networkd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libmysql.lib;Qt6Networkd.lib;libcrypto.lib;libssl.lib;Qt6Networkd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\Program Files\OpenSSL-Win64\lib\VC\x64\MDd;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\QT\6.6.3\msvc2019_64\include;E:\QT\6.6.3\msvc2019_64\include\QtNetwork;E:\CodeLib\OpenCV\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\QT\6.6.3\msvc2019_64\include;E:\QT\6.6.3\msvc2019_64\include\QtNetwork;E:\CodeLib\OpenCV\opencv\build\include;%(AdditionalIncludeDirectories);C:\Qt\6.6.3\msvc2019_64\include\QtNetwork</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
       <AdditionalLibraryDirectories>C:\Program Files\OpenSSL-Win64\lib\VC\x64\MDd;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libmysql.lib;libcrypto.lib;libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libmysql.lib;Qt6Networkd.lib;libcrypto.lib;libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(ProjectDir);$(Qt_INCLUDEPATH_);C:\Qt\6.6.3\msvc2019_64\include\QtNetwork</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
