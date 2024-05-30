@@ -13,6 +13,7 @@ uploader::uploader(QWidget* parent)
     projectPathLineEdit = ui->projectPathLineEdit;
     statusLabel = ui->statusLabel;
     ssh_Address = ui->SSh_Address;
+    repoPath_ = ui->repoPath_;
 }
 
 void uploader::on_browseButton_clicked() {
@@ -27,6 +28,21 @@ void uploader::on_browseButton_clicked() {
         QCoreApplication::processEvents();
     }
 }
+
+void uploader::on_browseButton1_clicked() {
+    QString dir = QFileDialog::getExistingDirectory(this, "选择项目源路径", "");
+    if (!dir.isEmpty()) {
+        repoPath_->setText(dir);
+        repoPath = repoPath_->text().toStdString();
+        statusLabel->setText(QString::fromLocal8Bit("项目路径已选择: ") + dir);
+        QCoreApplication::processEvents();
+    }
+    else {
+        statusLabel->setText(QString::fromLocal8Bit("未选择项目路径."));
+        QCoreApplication::processEvents();
+    }
+}
+
 
 void uploader::on_pushButton_clicked() {
     statusLabel->setText(QString::fromLocal8Bit("开始推送"));

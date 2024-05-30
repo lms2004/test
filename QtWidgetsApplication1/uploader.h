@@ -25,6 +25,7 @@ public:
 private slots:
     void on_browseButton_clicked();
     void on_pushButton_clicked();
+    void on_browseButton1_clicked();
 
 private:
     std::string repoPath = "C:\\Users\\lms\\Desktop\\ll";
@@ -32,6 +33,7 @@ private:
 
     Ui::uploader* ui;
     QLineEdit* projectPathLineEdit;    
+    QLineEdit*  repoPath_;
     QLineEdit* ssh_Address;
     QLabel* statusLabel;  
 

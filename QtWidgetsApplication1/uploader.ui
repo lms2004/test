@@ -42,8 +42,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>230</y>
+     <x>220</x>
+     <y>320</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -82,7 +82,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>170</y>
+     <y>250</y>
      <width>391</width>
      <height>41</height>
     </rect>
@@ -91,14 +91,50 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>150</y>
+     <x>60</x>
+     <y>220</y>
      <width>261</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
     <string>请输入对应的SSH仓库地址（否则取默认值）</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="repoPath_">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>170</y>
+     <width>391</width>
+     <height>41</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>140</y>
+     <width>271</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>请输入对应的本地存储仓库地址（否则取默认值）</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="browseButton1">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>180</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>浏览</string>
    </property>
   </widget>
  </widget>
