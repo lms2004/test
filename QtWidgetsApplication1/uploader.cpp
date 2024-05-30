@@ -77,7 +77,17 @@ bool uploader::isGitRepository(const std::string& path) {
 
 void uploader::copyProjectFiles(const std::string& source, const std::string& destination) {
     try {
-        fs::copy(source, destination, fs::copy_options::recursive | fs::copy_options::overwrite_existing);
+        // 获取源目录名称
+        std::string sourceDirName = fs::path(source).filename().string();
+        // 构造完整的目标路径
+        std::string fullDestination = destination + "/" + sourceDirName;
+
+        // 创建目标目录
+        fs::create_directory(fullDestination);
+
+        // 复制源目录内容到目标目录
+        fs::copy(source, fullDestination, fs::copy_options::recursive | fs::copy_options::overwrite_existing);
+
         statusLabel->setText(QString::fromLocal8Bit("项目文件夹复制成功."));
     }
     catch (const std::exception& e) {
