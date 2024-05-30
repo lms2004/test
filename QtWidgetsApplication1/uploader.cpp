@@ -4,50 +4,34 @@
 #include <fstream>
 #include <cstdlib>
 #include <iostream>
+#include <QInputDialog>
 
 uploader::uploader(QWidget* parent)
-    : QWidget(parent) {
-    QVBoxLayout* mainLayout = new QVBoxLayout(this);
-
-    QLabel* label = new QLabel("请输入项目源路径:", this);
-    mainLayout->addWidget(label);
-
-    projectPathLineEdit = new QLineEdit(this);
-    mainLayout->addWidget(projectPathLineEdit);
-
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
-
-    QPushButton* browseButton = new QPushButton("浏览...", this);
-    connect(browseButton, &QPushButton::clicked, this, &uploader::onBrowseButtonClicked);
-    buttonLayout->addWidget(browseButton);
-
-    QPushButton* pushButton = new QPushButton("推送到GitHub", this);
-    connect(pushButton, &QPushButton::clicked, this, &uploader::onPushButtonClicked);
-    buttonLayout->addWidget(pushButton);
-
-    mainLayout->addLayout(buttonLayout);
-
-    setLayout(mainLayout);
+    : QWidget(parent), ui(new Ui::uploader) {
+    ui->setupUi(this);
+    projectPathLineEdit = ui->projectPathLineEdit;
+    statusLabel = ui->statusLabel; // Assuming statusLabel is the name of your QLabel
 }
 
-void uploader::onBrowseButtonClicked() {
+
+void uploader::on_browseButton_clicked() {
     QString dir = QFileDialog::getExistingDirectory(this, "选择项目源路径", "");
     if (!dir.isEmpty()) {
         projectPathLineEdit->setText(dir);
     }
 }
 
-void uploader::onPushButtonClicked() {
+void uploader::on_pushButton_clicked() {
     std::string repoUrl = "git@github.com:lms2004/test.git";
     std::string branchName = "main";
     std::string projectSourcePath = makeLegalPath(projectPathLineEdit->text().toStdString());
 
     try {
         gitPush(repoUrl, branchName, projectSourcePath);
-        QMessageBox::information(this, "成功", "更改已成功推送到GitHub。");
+        statusLabel->setText("Changes have been successfully pushed to GitHub.");
     }
     catch (const std::runtime_error& e) {
-        QMessageBox::critical(this, "错误", e.what());
+        statusLabel->setText(QString::fromUtf8(e.what()));
         if (std::string(e.what()).find("Permission denied (publickey)") != std::string::npos) {
             outputSSHKey();
         }
@@ -71,19 +55,20 @@ std::string uploader::makeLegalPath(const std::string& path) {
 void uploader::runCommand(const std::string& command) {
     int result = std::system(command.c_str());
     if (result != 0) {
-        throw std::runtime_error("命令执行失败: " + command);
+        throw std::runtime_error("Command execution failed: " + command);
     }
 }
 
 void uploader::generateSSHKey(const std::string& keyPath) {
-    std::string passphrase;
-    std::cout << "未找到SSH密钥。请输入一个密码短语以生成新的SSH密钥: ";
-    std::getline(std::cin, passphrase);
+    bool ok;
+    QString passphrase = QInputDialog::getText(this, tr("Generate SSH Key"),
+        tr("No SSH key found. Please enter a passphrase to generate a new SSH key:"), QLineEdit::Password, "", &ok);
 
-    std::string command = "ssh-keygen -t rsa -b 4096 -N \"" + passphrase + "\" -f " + keyPath;
-    runCommand(command);
-
-    std::cout << "SSH密钥生成成功。" << std::endl;
+    if (ok && !passphrase.isEmpty()) {
+        std::string command = "ssh-keygen -t rsa -b 4096 -N \"" + passphrase.toStdString() + "\" -f " + keyPath;
+        runCommand(command);
+        statusLabel->setText("SSH key generated successfully.");
+    }
 }
 
 bool uploader::isGitRepository(const std::string& path) {
@@ -93,10 +78,10 @@ bool uploader::isGitRepository(const std::string& path) {
 void uploader::copyProjectFiles(const std::string& source, const std::string& destination) {
     try {
         fs::copy(source, destination, fs::copy_options::recursive | fs::copy_options::overwrite_existing);
-        std::cout << "项目文件夹复制成功。" << std::endl;
+        statusLabel->setText("Project folder copied successfully.");
     }
     catch (const std::exception& e) {
-        std::cerr << "复制项目文件夹时出错: " << e.what() << std::endl;
+        statusLabel->setText(QString("Error copying project folder: %1").arg(QString::fromUtf8(e.what())));
     }
 }
 
@@ -106,9 +91,14 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
         std::string envHome;
 
         if (!homeEnv) {
-            std::cout << "输出你的home目录 （类似：C:\\Users\\lms）";
-            std::getline(std::cin, envHome);
-            homeEnv = envHome.c_str();
+            bool ok;
+            QString homeDir = QInputDialog::getText(this, tr("Enter Home Directory"),
+                tr("Please enter your home directory (e.g., C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
+
+            if (ok && !homeDir.isEmpty()) {
+                envHome = homeDir.toStdString();
+                homeEnv = envHome.c_str();
+            }
         }
 
         std::string sshKeyPath = (fs::path(homeEnv) / ".ssh/id_rsa").string();
@@ -119,7 +109,7 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
         std::string repoPath = "C:\\Users\\lms\\Desktop\\ll";
 
         if (!isGitRepository(repoPath)) {
-            std::cout << "未找到git仓库。正在克隆仓库..." << std::endl;
+            statusLabel->setText("Git repository not found. Cloning repository...");
             runCommand("git clone " + repoUrl + " " + repoPath);
         }
 
@@ -131,19 +121,19 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
 
         int fetchResult = std::system("git fetch origin");
         if (fetchResult == 0) {
-            std::cout << "分支已是最新，无需更新。" << std::endl;
+            statusLabel->setText("Branch is up-to-date, no update needed.");
 
             copyProjectFiles(projectSourcePath, repoPath);
 
             runCommand("git add .");
-            runCommand("git commit -m \"自动提交\"");
+            runCommand("git commit -m \"Auto commit\"");
             runCommand("git push origin " + branchName);
 
-            std::cout << "更改已成功推送到GitHub。" << std::endl;
+            statusLabel->setText("Changes have been successfully pushed to GitHub.");
         }
     }
     catch (const std::exception& e) {
-        std::cerr << "错误: " << e.what() << std::endl;
+        statusLabel->setText(QString("Error: %1").arg(QString::fromUtf8(e.what())));
     }
 }
 
@@ -152,19 +142,24 @@ void uploader::outputSSHKey() {
     std::string envHome;
 
     if (!homeEnv) {
-        std::cout << "输出你的home目录 （类似：C:\\Users\\lms）";
-        std::getline(std::cin, envHome);
-        homeEnv = envHome.c_str();
+        bool ok;
+        QString homeDir = QInputDialog::getText(this, tr("Enter Home Directory"),
+            tr("Please enter your home directory (e.g., C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
+
+        if (ok && !homeDir.isEmpty()) {
+            envHome = homeDir.toStdString();
+            homeEnv = envHome.c_str();
+        }
     }
 
     std::string sshPubKeyPath = (fs::path(homeEnv) / ".ssh/id_rsa.pub").string();
     if (fs::exists(sshPubKeyPath)) {
         std::ifstream pubKeyFile(sshPubKeyPath);
         std::string pubKey((std::istreambuf_iterator<char>(pubKeyFile)), std::istreambuf_iterator<char>());
-        std::cout << "请将以下公钥添加到您的GitHub账户中以进行身份验证: " << std::endl;
-        std::cout << pubKey << std::endl;
+
+        statusLabel->setText(QString("Please add the following public key to your GitHub account for authentication:\n%1").arg(QString::fromStdString(pubKey)));
     }
     else {
-        std::cerr << "未找到公钥文件: " << sshPubKeyPath << std::endl;
+        statusLabel->setText(QString("Public key file not found: %1").arg(QString::fromStdString(sshPubKeyPath)));
     }
 }

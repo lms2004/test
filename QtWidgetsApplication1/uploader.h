@@ -1,5 +1,6 @@
 #ifndef _UPLOADER_H
 #define _UPLOADER_H
+#include "ui_uploader.h"
 
 #include <QWidget>
 #include <QVBoxLayout>
@@ -22,11 +23,15 @@ public:
     uploader(QWidget* parent = nullptr);
 
 private slots:
-    void onBrowseButtonClicked();
-    void onPushButtonClicked();
+    void on_browseButton_clicked();
+    void on_pushButton_clicked();
 
 private:
+    Ui::uploader* ui;
+
     QLineEdit* projectPathLineEdit;
+    QLabel* statusLabel;  // 添加这一行
+
     void generateSSHKey(const std::string& keyPath);
     void runCommand(const std::string& command);
     bool isGitRepository(const std::string& path);
