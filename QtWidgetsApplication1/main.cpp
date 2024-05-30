@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
         uploaderWindow.show();
         });
 
-    loginWindow.show();
+    uploaderWindow.show();
 
     return a.exec();
 }
