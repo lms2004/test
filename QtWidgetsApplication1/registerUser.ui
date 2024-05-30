@@ -13,31 +13,18 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="lineEditUsername">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>160</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>请输入用户名</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>130</x>
      <y>140</y>
-     <width>541</width>
+     <width>101</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>24</pointsize>
+     <pointsize>20</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -50,15 +37,15 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>200</y>
-     <width>491</width>
+     <x>160</x>
+     <y>180</y>
+     <width>81</width>
      <height>91</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>24</pointsize>
+     <pointsize>20</pointsize>
     </font>
    </property>
    <property name="text">
@@ -81,22 +68,6 @@
    </property>
    <property name="text">
     <string>注册失败！该用户名已存在！</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEditPassword">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>230</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="echoMode">
-    <enum>QLineEdit::Password</enum>
-   </property>
-   <property name="placeholderText">
-    <string>请输入密码</string>
    </property>
   </widget>
   <widget class="QLabel" name="register_success">
@@ -146,6 +117,35 @@
    </property>
    <property name="text">
     <string>已有账号？登录</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditPassword">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>210</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
+   <property name="placeholderText">
+    <string>请输入密码</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditUsername">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>160</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>请输入用户名</string>
    </property>
   </widget>
  </widget>
