@@ -96,8 +96,8 @@ void uploader::generateSSHKey(const std::string& keyPath) {
     statusLabel->setText(QString::fromLocal8Bit("正在生成 SSH 密钥..."));
     QCoreApplication::processEvents();
     bool ok;
-    QString passphrase = QInputDialog::getText(this, tr("生成 SSH 密钥"),
-        tr("未找到 SSH 密钥。请输入密码短语以生成新的 SSH 密钥:"), QLineEdit::Password, "", &ok);
+    QString passphrase = QInputDialog::getText(this, QString::fromLocal8Bit("生成 SSH 密钥"),
+        QString::fromLocal8Bit("未找到 SSH 密钥。请输入密码短语以生成新的 SSH 密钥:"), QLineEdit::Password, "", &ok);
 
     if (ok && !passphrase.isEmpty()) {
         std::string command = "ssh-keygen -t rsa -b 4096 -N \"" + passphrase.toStdString() + "\" -f " + keyPath;
@@ -150,8 +150,8 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
 
         if (!homeEnv) {
             bool ok;
-            QString homeDir = QInputDialog::getText(this, tr("输入主目录"),
-                tr("请输入您的主目录 (例如, C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
+            QString homeDir = QInputDialog::getText(this, QString::fromLocal8Bit("输入主目录"),
+                QString::fromLocal8Bit("请输入您的主目录 (例如, C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
 
             if (ok && !homeDir.isEmpty()) {
                 envHome = homeDir.toStdString();
@@ -163,7 +163,6 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
         if (!fs::exists(sshKeyPath)) {
             generateSSHKey(sshKeyPath);
         }
-
 
         if (!isGitRepository(repoPath)) {
             statusLabel->setText(QString::fromLocal8Bit("未找到 Git 仓库。正在克隆仓库..."));
@@ -206,8 +205,8 @@ void uploader::outputSSHKey() {
 
     if (!homeEnv) {
         bool ok;
-        QString homeDir = QInputDialog::getText(this, tr("输入主目录"),
-            tr("请输入您的主目录 (例如, C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
+        QString homeDir = QInputDialog::getText(this, QString::fromLocal8Bit("输入主目录"),
+            QString::fromLocal8Bit("请输入您的主目录 (例如, C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
 
         if (ok && !homeDir.isEmpty()) {
             envHome = homeDir.toStdString();
