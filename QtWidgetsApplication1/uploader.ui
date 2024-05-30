@@ -16,10 +16,10 @@
   <widget class="QLineEdit" name="projectPathLineEdit">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>120</y>
+     <x>70</x>
+     <y>90</y>
      <width>391</width>
-     <height>51</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
@@ -29,8 +29,8 @@
   <widget class="QPushButton" name="browseButton">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>200</y>
+     <x>470</x>
+     <y>100</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -42,8 +42,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>200</y>
+     <x>210</x>
+     <y>230</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -55,27 +55,50 @@
   <widget class="QLabel" name="statusLabel">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>10</y>
+     <x>70</x>
+     <y>-10</y>
      <width>281</width>
      <height>81</height>
     </rect>
    </property>
    <property name="text">
-    <string>statusLabel</string>
+    <string>请选择好需要上传的文件夹</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>100</y>
+     <x>70</x>
+     <y>60</y>
      <width>231</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
     <string>已选择的项目文件夹路径</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="SSh_Address">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>170</y>
+     <width>391</width>
+     <height>41</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>150</y>
+     <width>261</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>请输入对应的SSH仓库地址（否则取默认值）</string>
    </property>
   </widget>
  </widget>

@@ -27,10 +27,14 @@ private slots:
     void on_pushButton_clicked();
 
 private:
-    Ui::uploader* ui;
+    std::string repoPath = "C:\\Users\\lms\\Desktop\\ll";
+    std::string repoUrl = "git@github.com:lms2004/test.git";
 
-    QLineEdit* projectPathLineEdit;
-    QLabel* statusLabel;  // 添加这一行
+    Ui::uploader* ui;
+    QLineEdit* projectPathLineEdit;    
+    QLineEdit* ssh_Address;
+    QLabel* statusLabel;  
+
 
     void generateSSHKey(const std::string& keyPath);
     void runCommand(const std::string& command);
