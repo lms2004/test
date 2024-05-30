@@ -28,10 +28,10 @@ void uploader::on_pushButton_clicked() {
 
     try {
         gitPush(repoUrl, branchName, projectSourcePath);
-        statusLabel->setText("Changes have been successfully pushed to GitHub.");
+        statusLabel->setText(QString::fromLocal8Bit("成功推送到 GitHub."));
     }
     catch (const std::runtime_error& e) {
-        statusLabel->setText(QString::fromUtf8(e.what()));
+        statusLabel->setText(QString::fromLocal8Bit(e.what()));
         if (std::string(e.what()).find("Permission denied (publickey)") != std::string::npos) {
             outputSSHKey();
         }
@@ -55,19 +55,19 @@ std::string uploader::makeLegalPath(const std::string& path) {
 void uploader::runCommand(const std::string& command) {
     int result = std::system(command.c_str());
     if (result != 0) {
-        throw std::runtime_error("Command execution failed: " + command);
+        throw std::runtime_error("命令执行失败: " + command);
     }
 }
 
 void uploader::generateSSHKey(const std::string& keyPath) {
     bool ok;
-    QString passphrase = QInputDialog::getText(this, tr("Generate SSH Key"),
-        tr("No SSH key found. Please enter a passphrase to generate a new SSH key:"), QLineEdit::Password, "", &ok);
+    QString passphrase = QInputDialog::getText(this, tr("生成 SSH 密钥"),
+        tr("未找到 SSH 密钥。请输入密码短语以生成新的 SSH 密钥:"), QLineEdit::Password, "", &ok);
 
     if (ok && !passphrase.isEmpty()) {
         std::string command = "ssh-keygen -t rsa -b 4096 -N \"" + passphrase.toStdString() + "\" -f " + keyPath;
         runCommand(command);
-        statusLabel->setText("SSH key generated successfully.");
+        statusLabel->setText(QString::fromLocal8Bit("SSH 密钥生成成功."));
     }
 }
 
@@ -78,10 +78,10 @@ bool uploader::isGitRepository(const std::string& path) {
 void uploader::copyProjectFiles(const std::string& source, const std::string& destination) {
     try {
         fs::copy(source, destination, fs::copy_options::recursive | fs::copy_options::overwrite_existing);
-        statusLabel->setText("Project folder copied successfully.");
+        statusLabel->setText(QString::fromLocal8Bit("项目文件夹复制成功."));
     }
     catch (const std::exception& e) {
-        statusLabel->setText(QString("Error copying project folder: %1").arg(QString::fromUtf8(e.what())));
+        statusLabel->setText(QString::fromLocal8Bit("复制项目文件夹时出错: ") + QString::fromLocal8Bit(e.what()));
     }
 }
 
@@ -92,8 +92,8 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
 
         if (!homeEnv) {
             bool ok;
-            QString homeDir = QInputDialog::getText(this, tr("Enter Home Directory"),
-                tr("Please enter your home directory (e.g., C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
+            QString homeDir = QInputDialog::getText(this, tr("输入主目录"),
+                tr("请输入您的主目录 (例如, C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
 
             if (ok && !homeDir.isEmpty()) {
                 envHome = homeDir.toStdString();
@@ -109,7 +109,7 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
         std::string repoPath = "C:\\Users\\lms\\Desktop\\ll";
 
         if (!isGitRepository(repoPath)) {
-            statusLabel->setText("Git repository not found. Cloning repository...");
+            statusLabel->setText(QString::fromLocal8Bit("未找到 Git 仓库。正在克隆仓库..."));
             runCommand("git clone " + repoUrl + " " + repoPath);
         }
 
@@ -121,19 +121,19 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
 
         int fetchResult = std::system("git fetch origin");
         if (fetchResult == 0) {
-            statusLabel->setText("Branch is up-to-date, no update needed.");
+            statusLabel->setText(QString::fromLocal8Bit("分支已是最新，无需更新。"));
 
             copyProjectFiles(projectSourcePath, repoPath);
 
             runCommand("git add .");
-            runCommand("git commit -m \"Auto commit\"");
+            runCommand("git commit -m \"自动提交\"");
             runCommand("git push origin " + branchName);
 
-            statusLabel->setText("Changes have been successfully pushed to GitHub.");
+            statusLabel->setText(QString::fromLocal8Bit("更改已成功推送到 GitHub."));
         }
     }
     catch (const std::exception& e) {
-        statusLabel->setText(QString("Error: %1").arg(QString::fromUtf8(e.what())));
+        statusLabel->setText(QString::fromLocal8Bit("错误: ") + QString::fromLocal8Bit(e.what()));
     }
 }
 
@@ -143,8 +143,8 @@ void uploader::outputSSHKey() {
 
     if (!homeEnv) {
         bool ok;
-        QString homeDir = QInputDialog::getText(this, tr("Enter Home Directory"),
-            tr("Please enter your home directory (e.g., C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
+        QString homeDir = QInputDialog::getText(this, tr("输入主目录"),
+            tr("请输入您的主目录 (例如, C:\\Users\\lms)"), QLineEdit::Normal, "", &ok);
 
         if (ok && !homeDir.isEmpty()) {
             envHome = homeDir.toStdString();
@@ -157,9 +157,9 @@ void uploader::outputSSHKey() {
         std::ifstream pubKeyFile(sshPubKeyPath);
         std::string pubKey((std::istreambuf_iterator<char>(pubKeyFile)), std::istreambuf_iterator<char>());
 
-        statusLabel->setText(QString("Please add the following public key to your GitHub account for authentication:\n%1").arg(QString::fromStdString(pubKey)));
+        statusLabel->setText(QString::fromLocal8Bit("请将以下公钥添加到您的 GitHub 账户进行身份验证:\n") + QString::fromLocal8Bit(pubKey.c_str()));
     }
     else {
-        statusLabel->setText(QString("Public key file not found: %1").arg(QString::fromStdString(sshPubKeyPath)));
+        statusLabel->setText(QString::fromLocal8Bit("未找到公钥文件: ") + QString::fromLocal8Bit(sshPubKeyPath.c_str()));
     }
 }

@@ -16,17 +16,20 @@
   <widget class="QLineEdit" name="projectPathLineEdit">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>70</y>
-     <width>241</width>
-     <height>101</height>
+     <x>140</x>
+     <y>120</y>
+     <width>391</width>
+     <height>51</height>
     </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="browseButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>160</x>
      <y>200</y>
      <width>81</width>
      <height>31</height>
@@ -39,7 +42,7 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>390</x>
      <y>200</y>
      <width>91</width>
      <height>31</height>
@@ -52,14 +55,27 @@
   <widget class="QLabel" name="statusLabel">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>30</y>
-     <width>131</width>
-     <height>31</height>
+     <x>140</x>
+     <y>10</y>
+     <width>281</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="text">
     <string>statusLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>100</y>
+     <width>231</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>已选择的项目文件夹路径</string>
    </property>
   </widget>
  </widget>
