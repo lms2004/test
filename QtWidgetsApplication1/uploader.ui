@@ -55,10 +55,10 @@
   <widget class="QLabel" name="statusLabel">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>-10</y>
-     <width>281</width>
-     <height>81</height>
+     <x>60</x>
+     <y>20</y>
+     <width>461</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="text">
@@ -68,8 +68,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>60</y>
+     <x>10</x>
+     <y>30</y>
      <width>231</width>
      <height>20</height>
     </rect>

@@ -6,6 +6,17 @@
 #include <iostream>
 #include <QInputDialog>
 #include <QCoreApplication>
+#include <QFile>
+#include <QTextStream>
+#include <chrono>
+#include <ctime>
+
+#include <windows.h>
+#include <string>
+#include <stdexcept>
+#include <iostream>
+#include <vector>
+
 
 uploader::uploader(QWidget* parent)
     : QWidget(parent), ui(new Ui::uploader) {
@@ -33,7 +44,6 @@ void uploader::on_browseButton1_clicked() {
     QString dir = QFileDialog::getExistingDirectory(this, "选择项目源路径", "");
     if (!dir.isEmpty()) {
         repoPath_->setText(dir);
-        repoPath = repoPath_->text().toStdString();
         statusLabel->setText(QString::fromLocal8Bit("项目路径已选择: ") + dir);
         QCoreApplication::processEvents();
     }
@@ -42,7 +52,6 @@ void uploader::on_browseButton1_clicked() {
         QCoreApplication::processEvents();
     }
 }
-
 
 void uploader::on_pushButton_clicked() {
     statusLabel->setText(QString::fromLocal8Bit("开始推送"));
@@ -54,18 +63,26 @@ void uploader::on_pushButton_clicked() {
         if (ssh_Address->text().toStdString() != "") {
             repoUrl = ssh_Address->text().toStdString();
         }
+
+        if (repoPath_->text().toStdString() != "") {
+            repoPath = repoPath_->text().toStdString();
+        }
         gitPush(repoUrl, branchName, projectSourcePath);
-        statusLabel->setText(QString::fromLocal8Bit("成功推送到 GitHub."));
-        QCoreApplication::processEvents();
     }
     catch (const std::runtime_error& e) {
         statusLabel->setText(QString::fromLocal8Bit(e.what()));
         QCoreApplication::processEvents();
+        logError(e.what());
+        logError("sss");
         if (std::string(e.what()).find("Permission denied (publickey)") != std::string::npos) {
             outputSSHKey();
         }
+        return; // 添加这一行
     }
+    statusLabel->setText(QString::fromLocal8Bit("成功推送到 GitHub: ") + QString::fromStdString(repoUrl));
+    QCoreApplication::processEvents();
 }
+
 
 std::string uploader::makeLegalPath(const std::string& path) {
     statusLabel->setText(QString::fromLocal8Bit("正在处理项目路径..."));
@@ -86,9 +103,71 @@ std::string uploader::makeLegalPath(const std::string& path) {
 void uploader::runCommand(const std::string& command) {
     statusLabel->setText(QString::fromLocal8Bit("正在执行命令: ") + QString::fromStdString(command));
     QCoreApplication::processEvents();
-    int result = std::system(command.c_str());
-    if (result != 0) {
-        throw std::runtime_error("命令执行失败: " + command);
+
+    SECURITY_ATTRIBUTES saAttr;
+    saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+    saAttr.bInheritHandle = TRUE;
+    saAttr.lpSecurityDescriptor = NULL;
+
+    HANDLE hStdOutRead, hStdOutWrite;
+    if (!CreatePipe(&hStdOutRead, &hStdOutWrite, &saAttr, 0)) {
+        std::string errorMsg = "StdoutRd CreatePipe failed";
+        logError(errorMsg);
+        throw std::runtime_error(errorMsg);
+    }
+
+    if (!SetHandleInformation(hStdOutRead, HANDLE_FLAG_INHERIT, 0)) {
+        std::string errorMsg = "Stdout SetHandleInformation failed";
+        logError(errorMsg);
+        throw std::runtime_error(errorMsg);
+    }
+
+    PROCESS_INFORMATION piProcInfo;
+    STARTUPINFOA siStartInfo;
+    ZeroMemory(&piProcInfo, sizeof(PROCESS_INFORMATION));
+    ZeroMemory(&siStartInfo, sizeof(STARTUPINFOA));
+    siStartInfo.cb = sizeof(STARTUPINFOA);
+    siStartInfo.hStdError = hStdOutWrite;
+    siStartInfo.hStdOutput = hStdOutWrite;
+    siStartInfo.dwFlags |= STARTF_USESTDHANDLES;
+
+    std::vector<char> commandVec(command.begin(), command.end());
+    commandVec.push_back('\0');
+    if (!CreateProcessA(NULL, commandVec.data(), NULL, NULL, TRUE, 0, NULL, NULL, &siStartInfo, &piProcInfo)) {
+        std::string errorMsg = "CreateProcess failed (" + std::to_string(GetLastError()) + ")";
+        logError(errorMsg);
+        throw std::runtime_error(errorMsg);
+    }
+
+    CloseHandle(hStdOutWrite);
+
+    DWORD dwRead;
+    CHAR chBuf[4096];
+    std::string result;
+    while (ReadFile(hStdOutRead, chBuf, sizeof(chBuf), &dwRead, NULL) && dwRead > 0) {
+        result.append(chBuf, dwRead);
+    }
+
+    WaitForSingleObject(piProcInfo.hProcess, INFINITE);
+
+    DWORD exitCode;
+    if (!GetExitCodeProcess(piProcInfo.hProcess, &exitCode)) {
+        std::string errorMsg = "GetExitCodeProcess failed";
+        logError(errorMsg);
+        throw std::runtime_error(errorMsg);
+    }
+
+    CloseHandle(piProcInfo.hProcess);
+    CloseHandle(piProcInfo.hThread);
+    CloseHandle(hStdOutRead);
+
+    if (exitCode != 0) {
+        std::string errorMsg = "command:  " + command + "\nerror:\n" + result;
+        logError(errorMsg);
+        throw std::runtime_error(errorMsg);
+    }
+    else {
+        statusLabel->setText(QString::fromLocal8Bit("命令执行成功: ") + QString::fromStdString(command));
     }
 }
 
@@ -121,23 +200,20 @@ void uploader::copyProjectFiles(const std::string& source, const std::string& de
     try {
         statusLabel->setText(QString::fromLocal8Bit("正在复制项目文件..."));
         QCoreApplication::processEvents();
-        // 获取源目录名称
         std::string sourceDirName = fs::path(source).filename().string();
-        // 构造完整的目标路径
         std::string fullDestination = destination + "/" + sourceDirName;
 
-        // 创建目标目录
         fs::create_directory(fullDestination);
-
-        // 复制源目录内容到目标目录
         fs::copy(source, fullDestination, fs::copy_options::recursive | fs::copy_options::overwrite_existing);
 
         statusLabel->setText(QString::fromLocal8Bit("项目文件夹复制成功."));
         QCoreApplication::processEvents();
     }
     catch (const std::exception& e) {
-        statusLabel->setText(QString::fromLocal8Bit("复制项目文件夹时出错: ") + QString::fromLocal8Bit(e.what()));
+        std::string errorMsg = "复制项目文件夹时出错: " + std::string(e.what());
+        statusLabel->setText(QString::fromLocal8Bit(errorMsg.c_str()));
         QCoreApplication::processEvents();
+        logError(errorMsg);
     }
 }
 
@@ -176,24 +252,23 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
         runCommand("git checkout " + branchName);
         runCommand("git pull origin " + branchName);
 
-        int fetchResult = std::system("git fetch origin");
-        if (fetchResult == 0) {
-            statusLabel->setText(QString::fromLocal8Bit("分支已是最新，无需更新。"));
-            QCoreApplication::processEvents();
+        copyProjectFiles(projectSourcePath, repoPath);
 
-            copyProjectFiles(projectSourcePath, repoPath);
+        runCommand("git add .");
+        runCommand("git commit -m \"自动提交\"");
+        runCommand("git push origin " + branchName);
 
-            runCommand("git add .");
-            runCommand("git commit -m \"自动提交\"");
-            runCommand("git push origin " + branchName);
-
-            statusLabel->setText(QString::fromLocal8Bit("更改已成功推送到 GitHub."));
-            QCoreApplication::processEvents();
-        }
-    }
-    catch (const std::exception& e) {
-        statusLabel->setText(QString::fromLocal8Bit("错误: ") + QString::fromLocal8Bit(e.what()));
+        statusLabel->setText(QString::fromLocal8Bit("更改已成功推送到 GitHub."));
         QCoreApplication::processEvents();
+    }
+    catch (const std::runtime_error& e) {
+        std::string errorMsg = "error: " + std::string(e.what());
+        statusLabel->setText(QString::fromLocal8Bit(errorMsg.c_str()));
+        QCoreApplication::processEvents();
+        logError(errorMsg);
+        if (std::string(e.what()).find("Permission denied (publickey)") != std::string::npos) {
+            outputSSHKey();
+        }
     }
 }
 
@@ -221,9 +296,30 @@ void uploader::outputSSHKey() {
 
         statusLabel->setText(QString::fromLocal8Bit("请将以下公钥添加到您的 GitHub 账户进行身份验证:\n") + QString::fromLocal8Bit(pubKey.c_str()));
         QCoreApplication::processEvents();
+
+        // 使用QInputDialog来显示公钥信息并允许复制
+        bool ok;
+        QString inputText = QInputDialog::getMultiLineText(this, QString::fromLocal8Bit("公钥信息"),
+            QString::fromLocal8Bit("请将以下公钥添加到您的 GitHub 账户进行身份验证:\n"),
+            QString::fromLocal8Bit(pubKey.c_str()), &ok);
     }
     else {
-        statusLabel->setText(QString::fromLocal8Bit("未找到公钥文件: ") + QString::fromLocal8Bit(sshPubKeyPath.c_str()));
+        std::string errorMsg = "未找到公钥文件: " + sshPubKeyPath;
+        statusLabel->setText(QString::fromLocal8Bit(errorMsg.c_str()));
         QCoreApplication::processEvents();
+        logError(errorMsg);
+    }
+}
+
+
+
+void uploader::logError(const std::string& errorMsg) {
+    QFile file("error_log.txt");
+    if (file.open(QIODevice::Append | QIODevice::Text)) {
+        QTextStream out(&file);
+        auto now = std::chrono::system_clock::now();
+        auto now_time = std::chrono::system_clock::to_time_t(now);
+        out << "[" << QString::fromStdString(std::ctime(&now_time)).trimmed() << "] " << QString::fromStdString(errorMsg) << "\n";
+        file.close();
     }
 }

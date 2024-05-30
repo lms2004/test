@@ -1,0 +1,110 @@
+[Thu May 30 22:04:12 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:04:12 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:04:12 2024]           ddd
+[Thu May 30 22:04:12 2024]                                   ddd
+[Thu May 30 22:07:14 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:07:14 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:07:50 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:07:51 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:08:35 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:08:35 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:09:13 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:09:13 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:09:49 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Thu May 30 22:09:49 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+

@@ -28,7 +28,7 @@ private slots:
     void on_browseButton1_clicked();
 
 private:
-    std::string repoPath = "C:\\Users\\lms\\Desktop\\ll";
+    std::string repoPath = "C:\\Users\\lms\\Desktop\\s";
     std::string repoUrl = "git@github.com:lms2004/test.git";
 
     Ui::uploader* ui;
@@ -44,6 +44,8 @@ private:
     void copyProjectFiles(const std::string& source, const std::string& destination);
     void gitPush(const std::string& repoUrl, const std::string& branchName, const std::string& projectSourcePath);
     void outputSSHKey();
+    void logError(const std::string& errorMsg);
+        
     std::string makeLegalPath(const std::string& path);
 };
 
