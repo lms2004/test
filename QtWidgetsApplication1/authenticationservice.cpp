@@ -72,6 +72,7 @@ void AuthenticationService::saveUsersToDB() {
 }
 
 bool AuthenticationService::login(const std::string& username, const std::string& password) {
+    loadUsersFromDB();
     auto it = users.find(username);
     if (it == users.end()) {
         std::cout << "用户不存在\\n";

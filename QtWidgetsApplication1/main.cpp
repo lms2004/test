@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
         uploaderWindow.show();
         });
 
-    projectScoreManageWindow.show();
+    loginWindow.show();
 
     return a.exec();
 }

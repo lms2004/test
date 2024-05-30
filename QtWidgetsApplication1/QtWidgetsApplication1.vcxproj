@@ -61,8 +61,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <ExecutablePath>E:\Program Files\OpenSSL-Win64\include;$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>E:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\OpenSSL-Win64\lib;E:\Program Files\OpenSSL-Win64\lib\VC\x64\MD;D:\尹\OpenSSL-Win64\lib;D:\尹\OpenSSL-Win64\lib\VC\x64\MD;D:\mysql\mysql-8.2.0-winx64\lib;E:\Openssl\OpenSSL-Win64\lib;E:\Qt\Qt7.1\6.7.0\msvc2019_64\lib;E:\Qt\Qt7.1\6.6.3\msvc2019_64\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>E:\Program Files\MySQL\MySQL Server 8.0\include;E:\Program Files\OpenSSL-Win64\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\OpenSSL-Win64\include;D:\尹\OpenSSL-Win64\include;D:\mysql\mysql-8.2.0-winx64\include;E:\Qt\Qt7.1\6.7.0\msvc2019_64\include;E:\Openssl\OpenSSL-Win64\include;E:\Qt\Qt7.1\6.6.3\msvc2019_64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\OpenSSL-Win64\lib;D:\尹\OpenSSL-Win64\lib;D:\尹\OpenSSL-Win64\lib\VC\x64\MD;D:\mysql\mysql-8.2.0-winx64\lib;E:\Program Files\OpenSSL-Win64\lib\VC\x64\MD;E:\Openssl\OpenSSL-Win64\lib;E:\Qt\Qt7.1\6.7.0\msvc2019_64\lib;E:\Qt\Qt7.1\6.6.3\msvc2019_64\lib;D:\QT\6.6.3\msvc2019_64\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\mysql\mysql-8.2.0-winx64\include;D:\尹\OpenSSL-Win64\include;D:\QT\6.6.3\msvc2019_64\include;E:\Program Files\MySQL\MySQL Server 8.0\include;E:\Program Files\OpenSSL-Win64\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\OpenSSL-Win64\include;E:\Qt\Qt7.1\6.7.0\msvc2019_64\include;E:\Openssl\OpenSSL-Win64\include;E:\Qt\Qt7.1\6.6.3\msvc2019_64\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <IncludePath>C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\OpenSSL-Win64\include;$(IncludePath)</IncludePath>
@@ -74,7 +74,7 @@
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\Program Files\OpenSSL-Win64\lib\VC\x64\MDd;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\QT\6.6.3\msvc2019_64\include;E:\QT\6.6.3\msvc2019_64\include\QtNetwork;E:\CodeLib\OpenCV\opencv\build\include;%(AdditionalIncludeDirectories);C:\Qt\6.6.3\msvc2019_64\include\QtNetwork</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\QT\6.6.3\msvc2019_64\include;E:\QT\6.6.3\msvc2019_64\include\QtNetwork;E:\CodeLib\OpenCV\opencv\build\include;%(AdditionalIncludeDirectories);C:\Qt\6.6.3\msvc2019_64\include\QtNetwork;D:\QT\6.6.3\msvc2019_64\include;D:\QT\6.6.3\msvc2019_64\include\QtNetwork</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
