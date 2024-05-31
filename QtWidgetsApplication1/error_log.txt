@@ -1,110 +1,12 @@
-[Thu May 30 22:04:12 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+[Fri May 31 10:43:54 2024] E:/c++documents/My project/QT/QT-/QtWidgetsApplication1/x64
+[Fri May 31 12:58:23 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
 error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
+fatal: destination path 'C:\Users\lms\Desktop\s' already exists and is not an empty directory.
 
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:04:12 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
+[Fri May 31 12:58:23 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
 error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
+fatal: destination path 'C:\Users\lms\Desktop\s' already exists and is not an empty directory.
 
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:04:12 2024]           ddd
-[Thu May 30 22:04:12 2024]                                   ddd
-[Thu May 30 22:07:14 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:07:14 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:07:50 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:07:51 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:08:35 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:08:35 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:09:13 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:09:13 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:09:49 2024] command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-[Thu May 30 22:09:49 2024] error: command:  git clone git@github.com:lms2004/test.git C:\Users\lms\Desktop\s
-error:
-Cloning into 'C:\Users\lms\Desktop\s'...
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
+[Fri May 31 13:22:59 2024] error: �ڶ��ֽڵ�Ŀ������ҳ�У�û�д� Unicode �ַ�����ӳ�䵽���ַ���
+[Fri May 31 13:23:53 2024] error: �ڶ��ֽڵ�Ŀ������ҳ�У�û�д� Unicode �ַ�����ӳ�䵽���ַ���
+[Fri May 31 13:24:06 2024] error: �ڶ��ֽڵ�Ŀ������ҳ�У�û�д� Unicode �ַ�����ӳ�䵽���ַ���

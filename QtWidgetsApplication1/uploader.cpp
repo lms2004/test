@@ -17,6 +17,94 @@
 #include <iostream>
 #include <vector>
 
+std::string convertToBackSlash(const std::string& path) {
+    std::string result = path;
+    for (char& c : result) {
+        if (c == '/') {
+            c = '\\';
+        }
+    }
+    return "\"" + result + "\"";
+}
+
+std::string string_To_UTF8(const std::string& str)
+{
+    int nwLen = ::MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, NULL, 0);
+
+    wchar_t* pwBuf = new wchar_t[nwLen + 1];//一定要加1，不然会出现尾巴
+    ZeroMemory(pwBuf, nwLen * 2 + 2);
+
+    ::MultiByteToWideChar(CP_ACP, 0, str.c_str(), str.length(), pwBuf, nwLen);
+
+    int nLen = ::WideCharToMultiByte(CP_UTF8, 0, pwBuf, -1, NULL, NULL, NULL, NULL);
+
+    char* pBuf = new char[nLen + 1];
+    ZeroMemory(pBuf, nLen + 1);
+
+    ::WideCharToMultiByte(CP_UTF8, 0, pwBuf, nwLen, pBuf, nLen, NULL, NULL);
+
+    std::string retStr(pBuf);
+
+    delete[]pwBuf;
+    delete[]pBuf;
+
+    pwBuf = NULL;
+    pBuf = NULL;
+
+    return retStr;
+}
+
+void copyDirectory(const fs::path& source, const fs::path& destination) {
+    try {
+        // 检查源目录是否存在并且是一个目录
+        std::cout << "检查源目录是否存在: " << source << std::endl;
+        if (fs::exists(source) && fs::is_directory(source)) {
+            std::cout << "源目录存在且是一个目录: " << source << std::endl;
+
+            // 创建目标目录
+            if (!fs::exists(destination)) {
+                std::cout << "目标目录不存在，正在创建: " << destination << std::endl;
+                fs::create_directory(destination);
+            }
+            else {
+                std::cout << "目标目录已存在: " << destination << std::endl;
+            }
+
+            // 递归遍历源目录
+            for (const auto& entry : fs::recursive_directory_iterator(source)) {
+                const auto& path = entry.path();
+                auto relativePathStr = path.lexically_relative(source);
+                fs::path targetPath = destination / relativePathStr;
+
+                // 如果是目录则创建目录
+                if (fs::is_directory(path)) {
+                    std::cout << "创建目录: " << targetPath << std::endl;
+                    fs::create_directory(targetPath);
+                }
+                // 如果是文件则复制文件
+                else if (fs::is_regular_file(path)) {
+                    std::cout << "复制文件: " << path << " 到 " << targetPath << std::endl;
+                    fs::copy(path, targetPath);
+                }
+                // 跳过非常规文件
+                else {
+                    std::cerr << "跳过非常规文件: " << path << std::endl;
+                }
+            }
+        }
+        else {
+            std::cerr << "源目录不存在或不是目录。" << std::endl;
+        }
+    }
+    catch (fs::filesystem_error& e) {
+        std::cerr << "文件系统错误: " << e.what() << std::endl;
+    }
+    catch (std::exception& e) {
+        std::cerr << "一般错误: " << e.what() << std::endl;
+    }
+}
+
+
 
 uploader::uploader(QWidget* parent)
     : QWidget(parent), ui(new Ui::uploader) {
@@ -57,7 +145,9 @@ void uploader::on_pushButton_clicked() {
     statusLabel->setText(QString::fromLocal8Bit("开始推送"));
     QCoreApplication::processEvents();
     std::string branchName = "main";
-    std::string projectSourcePath = makeLegalPath(projectPathLineEdit->text().toStdString());
+
+    // 原始路径
+    std::string projectSourcePath = projectPathLineEdit->text().toLocal8Bit().data();
 
     try {
         if (ssh_Address->text().toStdString() != "") {
@@ -65,7 +155,7 @@ void uploader::on_pushButton_clicked() {
         }
 
         if (repoPath_->text().toStdString() != "") {
-            repoPath = repoPath_->text().toStdString();
+            repoPath = repoPath_->text().toLocal8Bit().data();
         }
         gitPush(repoUrl, branchName, projectSourcePath);
     }
@@ -81,23 +171,6 @@ void uploader::on_pushButton_clicked() {
     }
     statusLabel->setText(QString::fromLocal8Bit("成功推送到 GitHub: ") + QString::fromStdString(repoUrl));
     QCoreApplication::processEvents();
-}
-
-
-std::string uploader::makeLegalPath(const std::string& path) {
-    statusLabel->setText(QString::fromLocal8Bit("正在处理项目路径..."));
-    QCoreApplication::processEvents();
-    fs::path p(path);
-    fs::path legal_path;
-    auto preferred_separator = fs::path::preferred_separator;
-
-    for (const auto& part : p) {
-        if (!part.empty() && part != std::string(1, preferred_separator)) {
-            legal_path /= part;
-        }
-    }
-
-    return legal_path.string();
 }
 
 void uploader::runCommand(const std::string& command) {
@@ -200,13 +273,20 @@ void uploader::copyProjectFiles(const std::string& source, const std::string& de
     try {
         statusLabel->setText(QString::fromLocal8Bit("正在复制项目文件..."));
         QCoreApplication::processEvents();
-        std::string sourceDirName = fs::path(source).filename().string();
+
+        std::string sourceDirName = fs::u8path(string_To_UTF8(source)).filename().string();
         std::string fullDestination = destination + "/" + sourceDirName;
 
-        fs::create_directory(fullDestination);
-        fs::copy(source, fullDestination, fs::copy_options::recursive | fs::copy_options::overwrite_existing);
 
+        // Create a filesystem path using the UTF-8 encoded source path
+        fs::path sourcePath = fs::u8path(string_To_UTF8(source));
+
+        fs::path destinationPath = fs::u8path(string_To_UTF8(fullDestination)); // 使用UTF-8编码的路径
+
+        
+        copyDirectory(sourcePath, destinationPath);
         statusLabel->setText(QString::fromLocal8Bit("项目文件夹复制成功."));
+
         QCoreApplication::processEvents();
     }
     catch (const std::exception& e) {

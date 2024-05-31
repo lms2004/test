@@ -29,7 +29,7 @@ private slots:
 
 private:
     std::string repoPath = "C:\\Users\\lms\\Desktop\\s";
-    std::string repoUrl = "git@github.com:lms2004/test.git";
+    std::string repoUrl = "git@github.com:lms2004/aa.git";
 
     Ui::uploader* ui;
     QLineEdit* projectPathLineEdit;    
