@@ -327,6 +327,7 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
         if (!isGitRepository(repoPath)) {
             statusLabel->setText(QString::fromLocal8Bit("未找到 Git 仓库。正在克隆仓库..."));
             QCoreApplication::processEvents();
+
             runCommand("git clone " + repoUrl + " \"" + repoPath + "\"");
         }
 
