@@ -28,7 +28,7 @@ private slots:
     void on_browseButton1_clicked();
 
 private:
-    std::string repoPath = "C:\\Users\\lms\\Desktop\\s";
+    std::string repoPath = "C:\\Users\\lms\\Desktop\\哈  说是撒谎安定";
     std::string repoUrl = "git@github.com:lms2004/aa.git";
 
     Ui::uploader* ui;
