@@ -43,7 +43,7 @@ private:
     bool isGitRepository(const std::string& path);
     void copyProjectFiles(const std::string& source, const std::string& destination);
     void gitPush(const std::string& repoUrl, const std::string& branchName, const std::string& projectSourcePath);
-    void outputSSHKey();
+    void outputSSHKey(std::string ssh);
     void logError(const std::string& errorMsg);
         
     std::string makeLegalPath(const std::string& path);

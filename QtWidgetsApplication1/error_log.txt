@@ -1,12 +1,371 @@
-[Fri May 31 10:43:54 2024] E:/c++documents/My project/QT/QT-/QtWidgetsApplication1/x64
-[Fri May 31 12:58:23 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+[Fri May 31 14:46:29 2024] .ssh
+[Fri May 31 14:47:26 2024] .ssh\id_rsa
+[Fri May 31 14:47:26 2024] .ssh
+[Fri May 31 14:48:37 2024] .ssh\id_rsa
+[Fri May 31 14:48:37 2024] .ssh
+[Fri May 31 14:50:28 2024] C:\Users\lms\.ssh\id_rsa
+[Fri May 31 14:50:28 2024] C:\Users\lms\.ssh
+[Fri May 31 14:53:52 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
 error:
-fatal: destination path 'C:\Users\lms\Desktop\s' already exists and is not an empty directory.
+Cloning into 'C:\Users\lms\Desktop\s'...
+Host key verification failed.
+fatal: Could not read from remote repository.
 
-[Fri May 31 12:58:23 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 14:53:52 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
 error:
-fatal: destination path 'C:\Users\lms\Desktop\s' already exists and is not an empty directory.
+Cloning into 'C:\Users\lms\Desktop\s'...
+Host key verification failed.
+fatal: Could not read from remote repository.
 
-[Fri May 31 13:22:59 2024] error: �ڶ��ֽڵ�Ŀ������ҳ�У�û�д� Unicode �ַ�����ӳ�䵽���ַ���
-[Fri May 31 13:23:53 2024] error: �ڶ��ֽڵ�Ŀ������ҳ�У�û�д� Unicode �ַ�����ӳ�䵽���ַ���
-[Fri May 31 13:24:06 2024] error: �ڶ��ֽڵ�Ŀ������ҳ�У�û�д� Unicode �ַ�����ӳ�䵽���ַ���
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 14:55:52 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 14:55:52 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 14:59:44 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 14:59:44 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:13:42 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:13:42 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:13:42 2024] C:\Users\lms\.ssh\id_rsa
+[Fri May 31 15:14:40 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:14:40 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:17:09 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:17:09 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:17:36 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:17:36 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:17:55 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:17:55 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:18:42 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:18:42 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:18:42 2024] C:\Users\lms\.ssh\id_rsa.pub
+[Fri May 31 15:25:07 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:25:07 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:25:07 2024] C:\Users\lms\.ssh\id_rsa.pub
+[Fri May 31 15:26:45 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:26:45 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:26:45 2024] C:\Users\lms\.ssh\id_rsa.pub
+[Fri May 31 15:27:14 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:27:14 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:28:19 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:28:19 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:32:42 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:32:42 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:33:10 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:33:10 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:34:58 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:34:58 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:36:38 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:36:38 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:36:48 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:36:48 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:59:33 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 15:59:33 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 16:01:48 2024] command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+[Fri May 31 16:01:48 2024] error: command:  git clone git@github.com:lms2004/aa.git C:\Users\lms\Desktop\s
+error:
+Cloning into 'C:\Users\lms\Desktop\s'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+

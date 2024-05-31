@@ -158,7 +158,7 @@ void uploader::on_pushButton_clicked() {
             repoPath = repoPath_->text().toLocal8Bit().data();
         }
         gitPush(repoUrl, branchName, projectSourcePath);
-        statusLabel->setText(QString::fromLocal8Bit("成功推送到 GitHub: ") + QString::fromStdString(repoUrl));
+ /*       statusLabel->setText(QString::fromLocal8Bit("成功推送到 GitHub: ") + QString::fromStdString(repoUrl));*/
         QCoreApplication::processEvents();
     }
     catch (const std::runtime_error& e) {
@@ -166,14 +166,14 @@ void uploader::on_pushButton_clicked() {
         QCoreApplication::processEvents();
         logError(e.what());
         if (std::string(e.what()).find("Permission denied (publickey)") != std::string::npos) {
-            outputSSHKey();
+            outputSSHKey(projectSourcePath);
         }
         return; // 添加这一行
     }
 }
 
 void uploader::runCommand(const std::string& command) {
-    statusLabel->setText(QString::fromLocal8Bit("正在执行命令: ") + QString::fromStdString(command));
+    statusLabel->setText(QString::fromLocal8Bit("正在执行命令:\n ") + QString::fromStdString(command));
     QCoreApplication::processEvents();
 
     SECURITY_ATTRIBUTES saAttr;
@@ -246,12 +246,15 @@ void uploader::runCommand(const std::string& command) {
 void uploader::generateSSHKey(const std::string& keyPath) {
     statusLabel->setText(QString::fromLocal8Bit("正在生成 SSH 密钥..."));
     QCoreApplication::processEvents();
+
     bool ok;
     QString passphrase = QInputDialog::getText(this, QString::fromLocal8Bit("生成 SSH 密钥"),
         QString::fromLocal8Bit("未找到 SSH 密钥。请输入密码短语以生成新的 SSH 密钥:"), QLineEdit::Password, "", &ok);
 
     if (ok && !passphrase.isEmpty()) {
-        std::string command = "ssh-keygen -t rsa -b 4096 -N \"" + passphrase.toStdString() + "\" -f " + keyPath;
+        // 构建命令行，适应Windows环境       
+        std::string command = "ssh-keygen -t rsa -f \"" + keyPath + "\" -N \"\"";
+
         runCommand(command);
         statusLabel->setText(QString::fromLocal8Bit("SSH 密钥生成成功."));
         QCoreApplication::processEvents();
@@ -261,7 +264,6 @@ void uploader::generateSSHKey(const std::string& keyPath) {
         QCoreApplication::processEvents();
     }
 }
-
 bool uploader::isGitRepository(const std::string& path) {
     statusLabel->setText(QString::fromLocal8Bit("正在检查 Git 仓库..."));
     QCoreApplication::processEvents();
@@ -313,8 +315,11 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
                 homeEnv = envHome.c_str();
             }
         }
+        
+        fs::path destinationPath = fs::u8path(string_To_UTF8(homeEnv)); // 使用UTF-8编码的路径
+        std::string sshKeyPath = (destinationPath / ".ssh" / "id_rsa").string();
+        std::string sshDir = (destinationPath / ".ssh").string();
 
-        std::string sshKeyPath = (fs::path(homeEnv) / ".ssh" / "id_rsa").string();
         if (!fs::exists(sshKeyPath)) {
             generateSSHKey(sshKeyPath);
         }
@@ -346,12 +351,12 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
         QCoreApplication::processEvents();
         logError(errorMsg);
         if (std::string(e.what()).find("Permission denied (publickey)") != std::string::npos) {
-            outputSSHKey();
+            outputSSHKey(projectSourcePath);
         }
     }
 }
 
-void uploader::outputSSHKey() {
+void uploader::outputSSHKey(std::string ssh) {
     statusLabel->setText(QString::fromLocal8Bit("正在输出 SSH 公钥..."));
     QCoreApplication::processEvents();
     const char* homeEnv = std::getenv("HOME");
@@ -368,7 +373,10 @@ void uploader::outputSSHKey() {
         }
     }
 
-    std::string sshPubKeyPath = (fs::path(homeEnv) / ".ssh/id_rsa.pub").string();
+    fs::path destinationPath = fs::u8path(string_To_UTF8(homeEnv)); // 使用UTF-8编码的路径
+
+    std::string sshPubKeyPath = (destinationPath / ".ssh" / "id_rsa.pub").string();
+
     if (fs::exists(sshPubKeyPath)) {
         std::ifstream pubKeyFile(sshPubKeyPath);
         std::string pubKey((std::istreambuf_iterator<char>(pubKeyFile)), std::istreambuf_iterator<char>());
