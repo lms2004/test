@@ -165,7 +165,6 @@ void uploader::on_pushButton_clicked() {
         statusLabel->setText(QString::fromLocal8Bit(e.what()));
         QCoreApplication::processEvents();
         logError(e.what());
-        logError("sss");
         if (std::string(e.what()).find("Permission denied (publickey)") != std::string::npos) {
             outputSSHKey();
         }
@@ -315,7 +314,7 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
             }
         }
 
-        std::string sshKeyPath = (fs::path(homeEnv)  /".ssh\\id_rsa").string();
+        std::string sshKeyPath = (fs::path(homeEnv) / ".ssh" / "id_rsa").string();
         if (!fs::exists(sshKeyPath)) {
             generateSSHKey(sshKeyPath);
         }
