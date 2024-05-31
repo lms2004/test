@@ -158,6 +158,8 @@ void uploader::on_pushButton_clicked() {
             repoPath = repoPath_->text().toLocal8Bit().data();
         }
         gitPush(repoUrl, branchName, projectSourcePath);
+        statusLabel->setText(QString::fromLocal8Bit("成功推送到 GitHub: ") + QString::fromStdString(repoUrl));
+        QCoreApplication::processEvents();
     }
     catch (const std::runtime_error& e) {
         statusLabel->setText(QString::fromLocal8Bit(e.what()));
@@ -169,8 +171,6 @@ void uploader::on_pushButton_clicked() {
         }
         return; // 添加这一行
     }
-    statusLabel->setText(QString::fromLocal8Bit("成功推送到 GitHub: ") + QString::fromStdString(repoUrl));
-    QCoreApplication::processEvents();
 }
 
 void uploader::runCommand(const std::string& command) {
@@ -315,7 +315,7 @@ void uploader::gitPush(const std::string& repoUrl, const std::string& branchName
             }
         }
 
-        std::string sshKeyPath = (fs::path(homeEnv) / ".ssh/id_rsa").string();
+        std::string sshKeyPath = (fs::path(homeEnv)  /".ssh\\id_rsa").string();
         if (!fs::exists(sshKeyPath)) {
             generateSSHKey(sshKeyPath);
         }
