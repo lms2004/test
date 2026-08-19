@@ -1,0 +1,94 @@
+name: Runtime Dashboard Capture
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - runtime-preview/source.part*
+      - .chatgpt-trigger/runtime-dashboard-*.txt
+
+permissions:
+  contents: read
+
+concurrency:
+  group: runtime-dashboard-capture-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore exact preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat runtime-preview/source.part* | base64 -d > runtime-preview/index.html
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Capture and inspect
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          python3 -m http.server 8765 >artifacts/http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for _ in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8765/runtime-preview/ >/dev/null && break
+            sleep 1
+          done
+
+          cat > capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser = await chromium.launch({ headless: true });
+          const views = [
+            { name: 'desktop', width: 1440, height: 1100 },
+            { name: 'mobile', width: 430, height: 932 },
+          ];
+          const report = [];
+          for (const view of views) {
+            const context = await browser.newContext({ viewport: { width: view.width, height: view.height }, locale: 'zh-CN', colorScheme: 'dark' });
+            const page = await context.newPage();
+            const errors = [];
+            page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+            page.on('pageerror', e => errors.push(String(e)));
+            const response = await page.goto('http://127.0.0.1:8765/runtime-preview/#life', { waitUntil: 'networkidle', timeout: 30000 });
+            await page.waitForSelector('.runtime-mechanism-card');
+            const mechanismCards = await page.locator('.runtime-mechanism-card').count();
+            const causalStages = await page.locator('.runtime-rail-item').count();
+            if (mechanismCards !== 4) throw new Error(`mechanism cards: ${mechanismCards}`);
+            if (causalStages !== 5) throw new Error(`causal stages: ${causalStages}`);
+            await page.locator('[data-mechanism-id="shadow"]').first().click();
+            if ((await page.locator('.runtime-detail h3').innerText()) !== 'Shadow') throw new Error('Shadow selection failed');
+            await page.locator('.runtime-mechanism-card[data-mechanism-id="life"]').click();
+            if ((await page.locator('.runtime-detail h3').innerText()) !== '人生线') throw new Error('Life selection failed');
+            const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+            if (overflow > 0) throw new Error(`horizontal overflow: ${overflow}px`);
+            await page.screenshot({ path: `artifacts/runtime-dashboard-${view.name}.png`, fullPage: true, animations: 'disabled' });
+            report.push({ viewport: { width: view.width, height: view.height }, status: response?.status() ?? null, mechanismCards, causalStages, selected: await page.locator('.runtime-detail h3').innerText(), horizontalOverflow: overflow, consoleErrors: errors });
+            await context.close();
+          }
+          await browser.close();
+          fs.writeFileSync('artifacts/capture-report.json', JSON.stringify(report, null, 2));
+          if (report.some(x => x.consoleErrors.length)) process.exitCode = 1;
+          EOF
+          node capture.mjs
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-dashboard-${{ github.run_id }}
+          path: artifacts/
+          retention-days: 3
+          if-no-files-found: error
