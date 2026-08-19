@@ -1,0 +1,42 @@
+name: ChatGPT Temporary Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      task_note:
+        description: Human-readable note for this temporary run
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: chatgpt-temporary-runner
+  cancel-in-progress: false
+
+jobs:
+  runner-health-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TASK_NOTE: ${{ inputs.task_note }}
+    steps:
+      - name: Show task note
+        shell: bash
+        run: printf 'Task: %s\n' "$TASK_NOTE"
+
+      - name: Show runner environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "OS: $(uname -a)"
+          echo "CPU cores: $(nproc)"
+          echo "Memory:"
+          free -h
+          echo "Disk:"
+          df -h /
+          echo "Git: $(git --version)"
+          echo "Node: $(node --version)"
+          echo "Python: $(python3 --version)"
+          echo "Docker: $(docker --version)"
