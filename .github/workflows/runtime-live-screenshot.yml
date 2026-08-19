@@ -36,7 +36,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p artifacts
-          cat > /tmp/capture-live-runtime.mjs <<'EOF'
+          cat > capture-live-runtime.mjs <<'EOF'
           import { chromium } from 'playwright';
           import fs from 'node:fs';
 
@@ -86,7 +86,7 @@ jobs:
           fs.writeFileSync('artifacts/capture-report.json', JSON.stringify(report, null, 2));
           if (failed) process.exitCode = 1;
           EOF
-          node /tmp/capture-live-runtime.mjs
+          node ./capture-live-runtime.mjs
 
       - name: Upload screenshots and diagnostics
         if: always()
