@@ -1,0 +1,98 @@
+name: ChatGPT Live Runtime Screenshot
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .chatgpt-trigger/runtime-live-*.txt
+      - .github/workflows/runtime-live-screenshot.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: chatgpt-live-runtime-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Capture deployed Runtime page
+        shell: bash
+        env:
+          RUNTIME_URL: https://foresights.top:28444/runtime/
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          cat > /tmp/capture-live-runtime.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+
+          const url = process.env.RUNTIME_URL;
+          const browser = await chromium.launch({ headless: true });
+          const captures = [
+            { output: 'artifacts/runtime-live-desktop.png', viewport: { width: 1440, height: 1100 }, deviceScaleFactor: 1 },
+            { output: 'artifacts/runtime-live-mobile.png', viewport: { width: 430, height: 932 }, deviceScaleFactor: 2 },
+          ];
+          const report = [];
+          let failed = false;
+
+          for (const item of captures) {
+            const context = await browser.newContext({
+              viewport: item.viewport,
+              deviceScaleFactor: item.deviceScaleFactor,
+              locale: 'zh-CN',
+              colorScheme: 'dark',
+              ignoreHTTPSErrors: true,
+            });
+            const page = await context.newPage();
+            const errors = [];
+            page.on('console', (message) => {
+              if (message.type() === 'error') errors.push(message.text());
+            });
+            page.on('pageerror', (error) => errors.push(String(error)));
+            try {
+              const response = await page.goto(url, { waitUntil: 'networkidle', timeout: 35_000 });
+              await page.waitForSelector('body[data-page="hub"]', { timeout: 12_000 });
+              await page.waitForSelector('#hubCards .hub-row', { state: 'visible', timeout: 15_000 });
+              await page.evaluate(async () => {
+                const auto = document.getElementById('autoRefresh');
+                if (auto?.checked) auto.click();
+                if (document.fonts?.ready) await document.fonts.ready;
+              });
+              await page.waitForTimeout(1000);
+              await page.screenshot({ path: item.output, fullPage: true, animations: 'disabled' });
+              report.push({ url, output: item.output, status: response?.status() ?? null, title: await page.title(), viewport: item.viewport, consoleErrors: errors });
+            } catch (error) {
+              failed = true;
+              report.push({ url, output: item.output, viewport: item.viewport, error: String(error), consoleErrors: errors });
+            }
+            await context.close();
+          }
+
+          await browser.close();
+          fs.writeFileSync('artifacts/capture-report.json', JSON.stringify(report, null, 2));
+          if (failed) process.exitCode = 1;
+          EOF
+          node /tmp/capture-live-runtime.mjs
+
+      - name: Upload screenshots and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-live-${{ github.run_id }}
+          path: artifacts/
+          retention-days: 3
+          if-no-files-found: error
